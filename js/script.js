@@ -24,7 +24,7 @@ $('form').on('submit', (event) => {
   }
   $city = $('input[type = "text"]').val();
   
-  const $api = `${$proxy}api.openweathermap.org/data/2.5/weather?q=${$city}&units=imperial&appid=31966edad4cc438cff8333e9f83e5ec1`
+  const $api = `https://api.openweathermap.org/data/2.5/weather?q=${$city}&mode=xml&units=imperial&appid=31966edad4cc438cff8333e9f83e5ec1`
   const $forcast = `https://api.openweathermap.org/data/2.5/forecast?q=${$city}&mode=xml&units=imperial&appid=31966edad4cc438cff8333e9f83e5ec1`
   
   // navigator.geolocation.getCurrentPosition( (position) => {
@@ -39,9 +39,17 @@ $('form').on('submit', (event) => {
   
   $promise.then(
     (data) => {
-      // console.log(data.weather[0].icon)
-      let $icon = data.weather[0].icon;
-      let $timeOfDay = $icon.substring(2,4) == 'n' ? "Night": "Day";
+      let parser = new DOMParser();
+      let $xmlDoc = parser.parseFromString(data,"text/xml");
+      let $xmlTemp = data.getElementsByTagName("temperature")[0].attributes[0].value;
+      let $icon = data.getElementsByTagName("weather")[0].attributes[2].value;
+      let $xmlCheck = data.getElementsByTagName("weather")[0].attributes[2].value;
+      console.log(data)
+      console.log($xmlTemp)
+      
+      console.log($icon)
+
+      let $timeOfDay = $icon.substring(2,4) == 'n' ? "Nighttime": "Daytime";
       $date = new Date().toLocaleDateString('en-us')
       $dateTime = new Date().toLocaleTimeString([],{hour: '2-digit', minute: '2-digit'})
       
@@ -50,7 +58,7 @@ $('form').on('submit', (event) => {
       $('#main-weather').append('<dd><img src=' + $imgUrl+ '></dd>')
       $('#main-weather').append('<dd>' + $timeOfDay + '</dd>')
       $('#date').html('Time & Date: ' + $date + "\n " + $dateTime),
-      $('#temp').html(Math.ceil(data.main.temp) + '° F'),
+      $('#temp').html(Math.ceil($xmlTemp) + '° F'),
       $('#main-weather').append('<dd>'+titleCase(data.weather[0].description)+'</dd>')
       // console.log(data);
       // console.log(titleCase(data.weather[0].description));

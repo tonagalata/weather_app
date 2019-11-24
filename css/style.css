@@ -1,12 +1,7 @@
-#header {
-  border: 2px solid black;
+* {
+  margin: 0 auto;
 }
-#hero {
-  border: 2px solid black;  
-}
-#container {
-  border: 2px solid black;
-}
-#footer {
-  border: 2px solid black;
+
+body {
+  margin: 20px;
 }

@@ -14,11 +14,12 @@ let $lat, $long, $city, $country, $zipcode, $date, $dateTime;
 
 $('form').on('submit', (event) => {
   event.preventDefault();
-  if(!$('#five-day dd') && !$('#main-weather dd') && !$('#main-weather img')){return}else{
+  if(!$('#five-day dd') && !$('#main-weather dd') && !$('#main-weather img') && !$('#city dd')){return}else{
     for(let i = 0; i < 10; i++){
       $('#five-day dd').remove(i);
       $('#main-weather dd').remove(i);
       $('#main-weather img').remove(i);
+      $('#city dd').remove(i);
     }
   }
   $city = $('input[type = "text"]').val();
@@ -48,7 +49,7 @@ $('form').on('submit', (event) => {
       const $imgUrl = `http://openweathermap.org/img/wn/${$icon}@2x.png`
       $('#main-weather').append('<dd><img src=' + $imgUrl+ '></dd>')
       $('#main-weather').append('<dd>' + $timeOfDay + '</dd>')
-      $('#date').html('The Local time and date: ' + $date + " " + $dateTime),
+      $('#date').html('Time & Date: ' + $date + "\n " + $dateTime),
       $('#temp').html(Math.ceil(data.main.temp) + '° F'),
       $('#main-weather').append('<dd>'+titleCase(data.weather[0].description)+'</dd>')
       // console.log(data);

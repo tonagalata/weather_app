@@ -45,9 +45,9 @@ $('form').on('submit', (event) => {
       let $icon = data.getElementsByTagName("weather")[0].attributes[2].value;
       let $xmlCheck = data.getElementsByTagName("weather")[0].attributes[2].value;
       console.log(data)
-      console.log($xmlTemp)
+      // console.log($xmlTemp)
       
-      console.log($icon)
+      // console.log($icon)
 
       let $timeOfDay = $icon.substring(2,4) == 'n' ? "Nighttime": "Daytime";
       $date = new Date().toLocaleDateString('en-us')
@@ -76,11 +76,13 @@ $('form').on('submit', (event) => {
         
         let $dayTemp, $dyCondition, $dyDate, $dyTime, $time, $cityName, $dySymbol;
         console.log(data)
-        console.log(xmlCheck.getElementsByTagName("symbol")[1].attributes[2].value)
-        console.log(xmlCheck.getElementsByTagName("time")[8].attributes[1].value.toLocaleString('en-us', {year: '2-digit', month: '2-digit', day: '2-digit'}));
+        // console.log(xmlCheck.getElementsByTagName("symbol")[1].attributes[2].value)
+        // console.log(xmlCheck.getElementsByTagName("time")[8].attributes[1].value.toLocaleString('en-us', {year: '2-digit', month: '2-digit', day: '2-digit'}));
         $cityName = data.getElementsByTagName("name")[0].innerHTML;
-        console.log($cityName)
-        $('#city').append('<dd>'+ $cityName + '</dd>')
+        $countryName = data.getElementsByTagName("country")[0].innerHTML;
+        // console.log($countryName)
+        // console.log($cityName)
+        $('#city').append('<dd>'+ $cityName +', ' + $countryName +'</dd>')
         for(let i = 0; i <= 5; i++){
           let $icon = xmlCheck.getElementsByTagName("symbol")[i*8].attributes[2].value;
           const $imgUrl = `https://openweathermap.org/img/wn/${$icon}.png`

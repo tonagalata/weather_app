@@ -54,7 +54,7 @@ $('form').on('submit', (event) => {
       $dateTime = new Date().toLocaleTimeString([],{hour: '2-digit', minute: '2-digit'})
       
       // console.log($timeOfDay);
-      const $imgUrl = `http://openweathermap.org/img/wn/${$icon}@2x.png`
+      const $imgUrl = `https://openweathermap.org/img/wn/${$icon}@2x.png`
       $('#main-weather').append('<dd><img src=' + $imgUrl+ '></dd>')
       $('#main-weather').append('<dd>' + $timeOfDay + '</dd>')
       $('#date').html('Time & Date: ' + $date + "\n " + $dateTime),
@@ -83,7 +83,7 @@ $('form').on('submit', (event) => {
         $('#city').append('<dd>'+ $cityName + '</dd>')
         for(let i = 0; i <= 5; i++){
           let $icon = xmlCheck.getElementsByTagName("symbol")[i*8].attributes[2].value;
-          const $imgUrl = `http://openweathermap.org/img/wn/${$icon}.png`
+          const $imgUrl = `https://openweathermap.org/img/wn/${$icon}.png`
           $time = xmlCheck.getElementsByTagName("time")[i*8].attributes[1].value;
           $dyTime = new Date($time).toLocaleTimeString([],{hour: '2-digit', minute: '2-digit'});
           $dyDate = new Date($time).toLocaleString('en-us', {year: '2-digit', month: '2-digit', day: '2-digit'});
